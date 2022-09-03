@@ -1,0 +1,35 @@
+<th><input type="checkbox" class="select-all"/>All</th>
+ // and some other non important <th> fields 
+
+
+ all table rows 
+
+                @foreach($products as $product)
+                    <tr>
+                        <td>
+                            // every line checkbox
+                            <input type="checkbox" name="id[]" value="{{$product->id}}">
+                        </td>
+                        <td>{{ $product->name  }}</td>
+                        <td>{{ $product->tld  }}</td>
+                        <td>
+                            @foreach($product->tags as $tag)
+                                {{$tag->name}},
+                            @endforeach
+                        </td>
+                        <td>{{ $product->created_at->format('d.m.y')  }}</td>
+                    </tr>
+                @endforeach
+                
+                
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.select-all').on('click', function() {
+            var checkAll = this.checked;
+            $('input[type=checkbox]').each(function() {
+                this.checked = checkAll;
+            });
+        });
+    });
+</script>
